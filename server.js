@@ -3,10 +3,15 @@ const app = express();
 app.use(express.json());
 
 let serverActive = true;
-let activeUsers = {}; // userId -> { userId, username, lastPing }
+let activeUsers = {}; 
 let dailyUsers = new Set();
 let lastReset = Date.now();
 let chatMessages = [];
+
+// Rota raiz adicionada para o UptimeRobot manter o servidor 24/7
+app.get('/', (req, res) => {
+    res.status(200).send('Servidor Online!');
+});
 
 app.get('/status', (req, res) => res.json({ active: serverActive }));
 
