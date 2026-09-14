@@ -8,6 +8,11 @@ app.use(express.json());
 let chatMessages = [];
 let activeUsers = {};
 
+// Rota raiz para o UptimeRobot reconhecer o status (200 OK)
+app.get('/', (req, res) => {
+    res.status(200).send('Servidor Online!');
+});
+
 // Limpa usuários que não enviaram ping há mais de 10 segundos
 setInterval(() => {
     const now = Date.now();
